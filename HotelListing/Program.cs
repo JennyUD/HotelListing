@@ -7,19 +7,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog.Events;
 
 namespace HotelListing
 {
     public class Program
     {
         public static void Main(string[] args)
-        { //added
+        { 
             Log.Logger = new LoggerConfiguration() 
                 .WriteTo.File(
-                path: "c:\\hotellistings\\logs\\log-.txt",
-                outputTemplate: "(Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) [{level:u3}] {message:1j} {NewLine} {Exception} ",
+                path: "C:\\Users\\UDOKAJ\\source\\repos\\HotelListing\\logs\\log-.txt",
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{level:u3}] {message:1j} {NewLine} {Exception} ",
               rollingInterval: RollingInterval.Day,
-               restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
+               restrictedToMinimumLevel: LogEventLevel.Information
                ).CreateLogger();
             //added ends
             try
