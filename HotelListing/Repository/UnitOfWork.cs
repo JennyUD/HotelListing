@@ -13,10 +13,10 @@ namespace HotelListing.Repository
         private IGenericRepository<Country> _Countries;
         private  IGenericRepository<Hotel> _Hotels;
 
-        public UnitOfWork(DatabaseContext Context)
+        public UnitOfWork (DatabaseContext Context)
         {
             _Context = Context;
-           
+          
         }
         public IGenericRepository<Country> Countries => _Countries ??= new GenericRepository<Country>(_Context);
         //"??" means if it is null return a new instance object of Generic Repository of type Country base on database "_Context"
@@ -26,10 +26,8 @@ namespace HotelListing.Repository
         public void Dispose()
         { 
             _Context.Dispose();
-            GC.SuppressFinalize(this);// GC; Garbage collector for freeing up the memory
+            GC.SuppressFinalize(this); // GC; Garbage collector for freeing up the memory
         }
-
-        
 
         public async Task Save()
         {

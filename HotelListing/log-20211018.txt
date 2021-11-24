@@ -1,9 +1,0 @@
-(Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  (Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz) []  
-  

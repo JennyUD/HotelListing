@@ -17,6 +17,8 @@ using AutoMapper;
 using HotelListing.Configurations;
 using HotelListing.IRepository;
 using HotelListing.Repository;
+using Microsoft.AspNetCore.Identity;
+using HotelListing.Services;
 
 namespace HotelListing
 {
@@ -34,6 +36,11 @@ namespace HotelListing
         {
             services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+           
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+            services.ConfiguraionJWT( Configuration);
+
            //Cors: Cross Origin resource sharing; for allowing outsiders access AP 
             services.AddCors(o => {
                 o.AddPolicy ("AllowAll", builder =>
@@ -43,6 +50,7 @@ namespace HotelListing
             });
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAuthManager, AuthManager>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
@@ -62,21 +70,16 @@ namespace HotelListing
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelListing v1"));
             app.UseCors("AllowAll");
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute
-                //(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/id?"
-                //    );
+                
                 endpoints.MapControllers();
 
             });
         }
+
     }
 }

@@ -20,18 +20,28 @@ namespace HotelListing.Repository
             _db = _Context.Set<T>();
         }
 
+
+
+
         public async Task Delete(int id)
         {
             var entity = await _db.FindAsync(id);
             _db.Remove(entity);
         }
 
+
+
+
         public void DeleteRange(IEnumerable<T> entities)
         {
             _db.RemoveRange(entities);
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null)
+
+
+
+        public async Task<T> Get(Expression<Func<T, bool>> expression
+            , List<string> includes = null)
         {
             IQueryable<T> Query = _db;
             if (includes != null)
@@ -45,7 +55,14 @@ namespace HotelListing.Repository
             return await Query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
-        public async Task<List<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+
+
+
+        public async Task<List<T>> GetAll(
+            Expression<Func<T, bool>> expression = null
+            , Func<IQueryable<T>
+            , IOrderedQueryable<T>> orderBy = null
+            , List<string> includes = null)
         {
             IQueryable<T> Query = _db;
 
@@ -68,20 +85,30 @@ namespace HotelListing.Repository
             return await Query.AsNoTracking().ToListAsync();
         }
 
+
+
+
         public async Task Insert(T entity)
         {
             await _db.AddAsync(entity);
         }
+
+
+
 
         public async Task InsertRange(IEnumerable<T> entities)
         {
             await _db.AddRangeAsync(entities);
         }
 
+
+
+
         public  void Update(T entity)
         {
             _db.Attach(entity);
-            _Context.Entry(entity).State= EntityState.Modified;        }
+            _Context.Entry(entity).State= EntityState.Modified;       
+        }
     }
 
 }
